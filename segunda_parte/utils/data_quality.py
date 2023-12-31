@@ -14,7 +14,7 @@ def check_missing_values(df: pd.DataFrame) -> pd.Series:
     df (DataFrame): El DataFrame a analizar.
 
     Returns:
-    DataFrame: Un DataFrame con el porcentaje de valores faltantes por columna.
+    pd.Series: Una Serie de pandas con el porcentaje de valores faltantes por columna.
     """
     return df.isnull().mean().round(4) * 100
 

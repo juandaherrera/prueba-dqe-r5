@@ -71,5 +71,5 @@ segunda_parte
     └── pandas_api_ext.py
 ```
 En este caso podras encontrar:
-- El **Reporte de Calidad de Datos** como [```main.ipynb```](segunda_parte/main.ipynb). Si se desea puede ejecutarse o simplemente visualizar el reporte.
-- El **Resumen de Calidad de Datos** como [```summary.md```](segunda_parte/summary.md). Este contiene toda la información obtenida en el punto anterior, pero sin el código.
+- El [**Reporte de Calidad de Datos**](segunda_parte/summary.md) como ```summary.md```. Este es el entregable de esta sección y contiene el reporte de calidad obtenido a partir del análisis del output de la [primera parte](#primera-parte) de la prueba.
+- El [**Código del Reporte de Calidad**](segunda_parte/main.ipynb) como ```main.ipynb```. Si se desea puede ejecutarse o simplemente visualizar el notebook.

@@ -27,7 +27,7 @@ En este archivo se encuentra un resumen de todo lo expuesto en el [notebook de e
         - [4.2.3.2. artist\_popularity](#4232-artist_popularity)
         - [4.2.3.3. Datos atípicos para duration\_ms](#4233-datos-atípicos-para-duration_ms)
       - [4.2.4. 'release\_date' hace sentido?](#424-release_date-hace-sentido)
-      - [4.2.5. 'album\_total\_tracks' refleja el verdadero conteo de tracks del albúm?](#425-album_total_tracks-refleja-el-verdadero-conteo-de-tracks-del-albúm)
+      - [4.2.5. 'album\_total\_tracks' refleja el verdadero conteo de tracks del álbum?](#425-album_total_tracks-refleja-el-verdadero-conteo-de-tracks-del-álbum)
 
 
 ## 1.0. Datos generales
@@ -55,7 +55,7 @@ En esta sección se validaron la cantidad de datos faltantes dentro de cada colu
   <em>Ilustración 1. Gráfico de barras de valores faltantes</em>
 </p>
 
-Otra manera de verlo es por medio esta matriz de datos faltantes en donde el eje X son cada una de las filas del dataset.
+Otra manera de verlo es por medio esta matriz de datos faltantes en donde el eje Y son cada una de las filas del dataset.
 
 <p align="center">
   <img src="img/missing_matrix.png" alt="Matriz de valores faltantes">
@@ -65,7 +65,7 @@ Otra manera de verlo es por medio esta matriz de datos faltantes en donde el eje
 
 ### 2.1. Deepdive - Columnas con más valores faltantes
 
-La columna que más valores falantes presenta es la de 'album_name'. Entraremos a analizar a qué puede deberse. Inicialmente algo curioso que se identificó es que la columna de 'album_id' *no* tiene datos faltantes. Al revisar a detalle encontramos que son solo 2 albumes los que agrupan el conjunto de los 62 datos faltantes. Quedando de la siguiente manera:
+La columna que más valores falantes presenta es la de 'album_name'. Entraremos a analizar a qué puede deberse. Inicialmente algo curioso que se identificó es que la columna de 'album_id' *no* tiene datos faltantes. Al revisar a detalle encontramos que son solo 2 álbumes los que agrupan el conjunto de los 62 datos faltantes. Quedando de la siguiente manera:
 
 | album_id                  | filas faltantes   |
 | ------------              | ------------      |
@@ -79,7 +79,7 @@ Revisando la documentación de la [API de Spotify](https://developer.spotify.com
 
 > The name of the album. In case of an album takedown, the value may be an empty string.
 
-Una primera hipótesis es que podrían tratarse de dos albumes que hayan sido borrados. Sin embargo al validar en la misma API se encontró que estos albumes sí tienen nombres. Por tanto puede deberse a una falla en la respuesta o una alteración en el json de la prueba.
+Una primera hipótesis es que podrían tratarse de dos álbumes que hayan sido borrados. Sin embargo al validar en la misma API se encontró que estos álbumes sí tienen nombres. Por tanto puede deberse a una falla en la respuesta o una alteración en el json de la prueba.
 
 En cuanto al resto de casos con valores faltantes, estos pueden deberse también a lo ya mencionado. Sin embargo no representan un porcentaje singficativo sobre el total de la data. Por tanto y asumiendo que el porcentaje de completitud del dataframe va acorde a los lineamientos de la compañía, podemos dar por concluida esta sección afirmando que el dataframe cumple con ella.
 
@@ -110,7 +110,7 @@ Existen 38 track_ids repetidos, provenientes de una duplicación de 19 track_ids
 | 5hQSXkFgbxjZo9uCwd11so | False God             | 1NAmidJlEaVgA3MpcPFYGq | Lover      | 
 
 #### 3.2.1. audio_features.id repetidos
-Ahora bien, si consideramos que cada track tiene un audio_features.id único, podríamos hacer el conteo de duplicados con este id para tener en consideración aquellos tracks_ids vacíos. Este conteo dio como resultado que hay 40 audio_features.id repetidos, provenientes de una duplicación de 20 track_ids que serían los originales. Por lo que el dataframe, eliminando estos 20 registros quedaría de **519 filas**. Ejemplos:
+Ahora bien, si consideramos que cada track tiene un audio_features.id único, podríamos hacer el conteo de duplicados con este id para tener en consideración aquellos tracks_ids vacíos. Este conteo dio como resultado que hay 40 audio_features.id repetidos, provenientes de una duplicación de 20 track_ids que serían los originales. Por lo que el dataframe, eliminando estos 20 registros, quedaría de **519 filas**. Ejemplos:
 
 | track_id               | track_name                 | album_id               | album_name | audio_features.id       |
 |------------------------|----------------------------|------------------------|------------|-------------------------|
@@ -147,9 +147,9 @@ y solo se encontraron inconsistencias en el par ```('track_name', 'track_id')```
 | 6sQckd3Z8NPxVVKUnavY1F | ‘tis the damn season                        | 6AORtDjduMM3bupSWzbTSG | evermore (deluxe version)         |
 | 7dW84mWkdWE5a6lFWxJCBG | ‘tis the damn season                        | 2Xoteh7uEpea4TohMxjtaq | evermo                            |
 
-Es importante tener en cuenta que cada uno de estos tracks "repetidos" pertenecen a albumes diferentes. Investigando un poco estos casos específicos se deben a que Taylor Swift regrabó todos los tracks que tenía con su disquera anterior ([fuente](https://www.xataka.com/musica/nuevo-choque-taylor-swift-discograficas-contratos-cambian-para-evitar-que-otros-artistas-sigan-sus-pasos#:~:text=Cuando%20Taylor%20Swift%20anunci%C3%B3%20en,se%20entendi%C3%B3%20como%20una%20excentricidad.)).
+Es importante tener en cuenta que cada uno de estos tracks "repetidos" pertenecen a álbumes diferentes. Investigando un poco estos casos específicos, en su mayoría se deben a que Taylor Swift regrabó todos los tracks que tenía con su disquera anterior ([fuente](https://www.xataka.com/musica/nuevo-choque-taylor-swift-discograficas-contratos-cambian-para-evitar-que-otros-artistas-sigan-sus-pasos#:~:text=Cuando%20Taylor%20Swift%20anunci%C3%B3%20en,se%20entendi%C3%B3%20como%20una%20excentricidad.)) o a que son versiones "Deluxe" de la misma canción y pertenecen a otro(s) álbum(es).
 
-**Nota:** las validaciones de X_name a X_id solo fueron realizadas para este caso específico. Pues dentro de todo el negocio podrían haber, por ejemplo, albumes distintos con el mismo nombre. Así mismo para canciones y demás variables.
+**Nota:** las validaciones de X_name a X_id solo fueron realizadas para este caso específico. Pues dentro de todo el negocio podrían haber, por ejemplo, álbumes distintos con el mismo nombre. Así mismo para canciones y demás variables.
 
 ### 3.4. Porcentaje de Unicidad
 - Evaluando la unicidad en base al track_id se obtuvo un valor de **94.99%**.
@@ -168,7 +168,7 @@ Aquí se validó que cada columna contenga tipos de datos consistentes. Los tipo
 También se tuvieron en cuenta otras validaciones lógicas del dataset.
 
 ### 4.1. Tipos de datos
-Se validaron los tipos de datos presentes dentro de cada columna del dataset y se plamó en este gráfico:
+Se validaron los tipos de datos presentes dentro de cada columna del dataset y se plasmó en este gráfico:
 
 <p align="center">
   <img src="img/data_types.png" alt="Gráfico de Tipos de Datos">
@@ -180,7 +180,7 @@ Se validaron los tipos de datos presentes dentro de cada columna del dataset y s
 
 #### 4.2.1. No se cumple con el tipo de dato
 - En la gráfica anterior resalta que en la columna 'album_total_tracks' la regla general es que los datos deberían ser númericos, sin embargo hay 15 casos donde esto no sucede y se debe a que en lugar de poner el número 13 se puso Thirteen.
-- Adicionalmente también se identifica que en la columna explicit deberían haber en su mayoría valores booleanos, sin embargo hay 4 casos donde el valor está puesto como 'Si' (1) o 'No' (3)
+- Adicionalmente también se identifica que en la columna explicit deberían haber en su mayoría valores booleanos (True o False), sin embargo hay 4 casos donde el valor está puesto como 'Si' (1) o 'No' (3)
   
 #### 4.2.2. No se cumple que todos los valores sean positivos
 Se identificaron tres columnas donde hay valores negativos que no tienen mucho sentido y se procede a validarlas:
@@ -227,7 +227,13 @@ Finalmente para audio_features.acousticness se encontraron 2 valores negativos c
 
 
 #### 4.2.3. Se cumplen Rangos para valores númericos?
-Para esta validación se consultaron los rangos entre los que debían encontrar 9 variables númericas del modelo (en su mayoría audio_features). Al realizar la validación todas dan casi al 100% dentro de los rangos y las que no es debido a valores faltantes y no a valores fuera de los rangos. Esto a excepción de dos variables: 'audio_features.acousticness' y 'artist_popularity'. 
+Para esta validación se consultaron en la documentación de la API los rangos entre los que se debían encontrar 11 variables númericas del modelo (en su mayoría audio_features). Al realizar la validación todas dan casi al 100% dentro de los rangos y las que no es debido a valores faltantes y no a valores fuera de los rangos. Esto a excepción de dos variables: 'audio_features.acousticness' y 'artist_popularity'. Variables validadas:
+
+```
+track_popularity, artist_popularity, audio_features.danceability, audio_features.energy, 
+audio_features.loudness, audio_features.speechiness, audio_features.acousticness, audio_features.instrumentalness, 
+audio_features.liveness, audio_features.valence, audio_features.time_signature
+```
 
 ##### 4.2.3.1. audio_features.acousticness
 Adicional a las 2 entradas que fueron encontradas en el punto [4.2.2.3.](#4223-audio_featuresacousticness) se encontró que estos otros registros están fuera del rango (0, 1): 
@@ -257,16 +263,16 @@ En este caso se validaron los casos atípicos en cuanto a duración de las canci
 
 Con el método del rango intercuartilico se encontraron 23 datos atípicos. De estos 5 son de duraciones menores a 2.2 minutos y los 18 restantes de duraciones mayores 5.5 minutos. De estos 23 datos atípicos se encontró que solo 3 son valores incorrectos, el resto tienen una duración que, si bien no se encuentra dentro de las duraciones habituales de la artista, obedecen a la duración real de los tracks. Estos son los 3 tracks con duraciones incorrectas:
 
-| track_id               | track_name             | album_id               | duration_ms | duration_min |            |
-|------------------------|------------------------|------------------------|-------------|--------------|------------|
-| 5PjfMmF06QtxTPZBZHdhoZ | Everything Has Changed | 1KVKqWeRuXsJDLTW0VuD29 | 10          | 0.000167     | VERDADERO  |
-| 7mFiEij8AXPUZB7aKLbUlQ | Mean - Live/2011       | 6fyR4wBPwLHKcRtxgd4sGh | 1000        | 0.016667     | VERDADERO  |
-| 7BFc7ffruhZ4Hecnqf5xju | Long Live              | 6S6JQWzUrJVcJLK4fi74Fw | 3000        | 0.05         | VERDADERO  |
+| track_id               | track_name             | album_id               | duration_ms | duration_min |
+|------------------------|------------------------|------------------------|-------------|--------------|
+| 5PjfMmF06QtxTPZBZHdhoZ | Everything Has Changed | 1KVKqWeRuXsJDLTW0VuD29 | 10          | 0.000167     |
+| 7mFiEij8AXPUZB7aKLbUlQ | Mean - Live/2011       | 6fyR4wBPwLHKcRtxgd4sGh | 1000        | 0.016667     |
+| 7BFc7ffruhZ4Hecnqf5xju | Long Live              | 6S6JQWzUrJVcJLK4fi74Fw | 3000        | 0.05         |
 
 
 #### 4.2.4. 'release_date' hace sentido?
-- Se validó que las fechas de release de las canciones sean menores o iguales al año actual (2023) [en producción podría validarse vs la fecha actual], ya que esta API solo nos retorna albumnes que ya fueron lanzados.
-- En este caso específico también validaremos que los albumes hayan sido lanzados desde el año en que Taylor Swift está activa en la música (2004) Ref: [Wikipedia](https://es.wikipedia.org/wiki/Taylor_Swift).
+- Se validó que las fechas de release de las canciones sean menores o iguales al año actual (2023) [en producción podría validarse vs la fecha actual], ya que esta API solo nos retorna álbumes que ya fueron lanzados.
+- En este caso específico también validaremos que los álbumes hayan sido lanzados desde el año en que Taylor Swift está activa en la música (2004) Ref: [Wikipedia](https://es.wikipedia.org/wiki/Taylor_Swift).
 
 En este caso hay 38 casos de tracks donde no hace sentido el año de lanzamiento. 15 fueron lanzados antes del 2004 y 23 fueron "lanzados" posterior al 2023. Ejemplos:
 
@@ -279,8 +285,8 @@ En este caso hay 38 casos de tracks donde no hace sentido el año de lanzamiento
 | 4BYejINgfZF0qKDMEH2cim | Picture To Burn                             | 5eyZZoQEFQWRHkV2xgAeBw | Taylor Swift | 1989-10-24  |
 | 2TF4UtYreqNbQ6Z9AccldU | Teardrops On My Guitar - Radio Single Remix | 5eyZZoQEFQWRHkV2xgAeBw | Taylor Swift | 1989-10-24  |
 
-#### 4.2.5. 'album_total_tracks' refleja el verdadero conteo de tracks del albúm?
-En esta sección se validó que al hacer un conteo manual de los tracks_ids por cada album, dicho valor coincidiera con el 'album_total_tracks' que es el valor que ya viene calculado por defecto para esta misma tarea. Estos fueron los casos donde esta validación falló:
+#### 4.2.5. 'album_total_tracks' refleja el verdadero conteo de tracks del álbum?
+En esta sección se validó que al hacer un conteo manual de los tracks_ids por cada álbum, dicho valor coincidiera con el 'album_total_tracks' que es el valor que ya viene calculado por defecto para esta misma tarea. Estos fueron los casos donde esta validación falló:
 
 | album_id               | manual_count | original_count | difference  |
 |------------------------|--------------|----------------|-------------|
@@ -288,4 +294,4 @@ En esta sección se validó que al hacer un conteo manual de los tracks_ids por 
 | 2Xoteh7uEpea4TohMxjtaq | 15           | 10             | 5           |
 | 6kZ42qRrzov54LcAk4onW9 | 30           | 34             | -4          |
 
-En este caso encontramos que hay 4 albumes que tienen un conteo diferente al que se está mostrando. La precisión de albumes con conteo acertado fue del 88%
+En este caso encontramos que hay 3 álbumes que tienen un conteo diferente al que se está mostrando. La precisión de álbumes con conteo acertado fue del 88%
