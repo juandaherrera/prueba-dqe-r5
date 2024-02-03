@@ -1,7 +1,7 @@
-# Prueba técnica Data Quality - R5
-![Python 3.11.5](https://img.shields.io/badge/python-3.11.5-blue.svg)
+# Prueba técnica Data Quality - Reto Spotify
+[![Python](https://img.shields.io/badge/Python-3.11+-5646ED?style=for-the-badge&logo=python&logoColor=white&labelColor=101010)](https://python.org)
 
-Prueba técnica de Data Quality para R5. 
+Prueba técnica de Data Quality Engineer - [Reto Spotify](TASKS.md). 
 
 # Instalación
 
